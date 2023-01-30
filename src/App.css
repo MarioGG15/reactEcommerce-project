@@ -1,0 +1,10 @@
+.detailProducts-img{
+    display: flex;
+    overflow-x: scroll;
+    width: 400px;
+}
+
+.img{
+    object-fit: contain;
+    height: 300px;
+}
