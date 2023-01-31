@@ -9,7 +9,7 @@ export const isLoadingSlice = createSlice({
             return isLoading
         }
     }
-})
+});
 
 export const { setIsLoading } = isLoadingSlice.actions;
 

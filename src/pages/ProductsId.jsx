@@ -7,21 +7,21 @@ import { filterProductsCategoryThunk } from '../store/slices/products.slice';
 
 const ProductsId = () => {
 
-    const { id } = useParams()
-    const [products, setProducts] = useState({})
-    const dispatch = useDispatch()
-    const productsSuggested = useSelector(state => state.products)
-    const navigate = useNavigate()
+    const { id } = useParams();
+    const [products, setProducts] = useState({});
+    const dispatch = useDispatch();
+    const productsSuggested = useSelector(state => state.products);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`https://e-commerce-api-v2.academlo.tech/api/v1/products/${id}`)
             .then(res => {
                 setProducts(res.data)
                 dispatch(filterProductsCategoryThunk(res.data.category.id))
-            })
-    }, [id])
+            });
+    }, [id]);
 
-    console.log(products)
+    console.log(products);
 
     return (
         <div>
