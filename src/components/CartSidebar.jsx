@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Offcanvas } from 'react-bootstrap';
+import { Button, Offcanvas } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartThunk } from '../store/slices/cart.slice';
+import { getCartThunk, purchaseCartThunk } from '../store/slices/cart.slice';
 
 const CartSidebar = ({show, handleClose}) => {
 
@@ -10,7 +10,11 @@ const CartSidebar = ({show, handleClose}) => {
 
     useEffect(() => {
         dispatch(getCartThunk())
-    }, [])
+    }, []);
+
+    const checkoutCart = () => {
+        dispatch(purchaseCartThunk())
+    }
 
     console.log(cart);
 
@@ -29,6 +33,9 @@ const CartSidebar = ({show, handleClose}) => {
                             </li>
                         ))}
                     </ul>
+                    <Button onClick={checkoutCart}>
+                        Checkout
+                    </Button>
                 </Offcanvas.Body>
             </Offcanvas>
         </div>

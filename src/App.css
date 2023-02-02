@@ -8,3 +8,13 @@
     object-fit: contain;
     height: 300px;
 }
+
+.card-btn{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+}
