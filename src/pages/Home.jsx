@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Form, InputGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Button, Card, Col, Dropdown, Form, InputGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { filterProductsCategoryThunk, filterProductsNameThunk, getProductsThunk } from '../store/slices/products.slice';
@@ -24,21 +24,25 @@ const Home = () => {
         <div>
             <Row>
                 <Col lg={2}>
-                    <ListGroup>
-                        {categories.map((category) => (
-                            <ListGroup.Item
-                                key={category.id}
-                                onClick={() => dispatch(filterProductsCategoryThunk(category.id))}
-                                active
-                                style={{ cursor: "pointer" }}
-                            >
-                                {category.name}
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                            Categories
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {categories.map((category) => (
+                                <Dropdown.Item
+                                    key={category.id}
+                                    onClick={() => dispatch(filterProductsCategoryThunk(category.id))}
+                                    active
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    {category.name}
+                                </Dropdown.Item>
+                            ))}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Col>
                 <Col lg={10}>
-                    <h1>Home</h1>
                     <InputGroup className="mb-3">
                         <Form.Control
                             placeholder="What are you looking for?"
@@ -52,7 +56,7 @@ const Home = () => {
                             id="button-addon2"
                             onClick={() => dispatch(filterProductsNameThunk(productsSearch))}
                         >
-                            Button
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </Button>
                     </InputGroup>
                     <Row xs={1} md={2} lg={3} className="g-4">
@@ -60,12 +64,12 @@ const Home = () => {
                             <Col key={products.id}>
                                 <Card
                                     onClick={() => navigate(`/products/${products.id}`)}
-                                    style={{ cursor: "pointer"}}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     <Card.Img
                                         variant="top"
                                         src={products.images[0].url}
-                                        style={{height: "300px", objectFit: "contain"}}
+                                        style={{ height: "300px", objectFit: "contain" }}
                                     />
                                     <Card.Body>
                                         <Card.Title>{products.brand}</Card.Title>

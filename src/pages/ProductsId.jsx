@@ -22,7 +22,7 @@ const ProductsId = () => {
             });
     }, [id]);
 
-    const [quantity, setQuantity] = useState("");
+    const [quantity, setQuantity] = useState(1);
 
     const addToCart = () => {
         const productInCart = {
@@ -34,14 +34,9 @@ const ProductsId = () => {
 
     return (
         <div>
-            <h1>{products.title} ${products.price}</h1>
-            <input type="text" value={quantity} onChange={e => setQuantity(e.target.value)} />
-            <Button onClick={addToCart}>
-                Add to Cart
-            </Button>
             <Row>
-                <Col lg={9}>
-                    <Carousel fade>
+                <Col lg={8}>
+                    <Carousel variant='dark'>
                         <Carousel.Item>
                             <img
                                 className="d-block w-100"
@@ -49,8 +44,6 @@ const ProductsId = () => {
                                 alt="First slide"
                                 style={{ objectFit: "contain", height: "300px" }}
                             />
-                            <Carousel.Caption>
-                            </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
@@ -59,9 +52,6 @@ const ProductsId = () => {
                                 alt="Second slide"
                                 style={{ objectFit: "contain", height: "300px" }}
                             />
-
-                            <Carousel.Caption>
-                            </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
                             <img
@@ -70,19 +60,41 @@ const ProductsId = () => {
                                 alt="Third slide"
                                 style={{ objectFit: "contain", height: "300px" }}
                             />
-
-                            <Carousel.Caption>
-                            </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>
                 </Col>
-                <Col lg={3}>
-                    <div>
-                        <div><p>{products.description}</p></div>
+                <Col lg={4}>
+                    <div className='product-data'>
+                        <div className='product-header'>
+                            <h1>{products.brand}</h1>
+                            <h2>{products.title}</h2>
+                        </div>
+                        <div className='product-description'>
+                            <p>{products.description}</p>
+                        </div>
+                        <div className='product-footer'>
+                            <div className='product-price'>
+                                <h3>Price</h3>
+                                <h4>${products.price}</h4>
+                            </div>
+                            <div className='product-controls'>
+                                <h3>Quantity</h3>
+                                <div className='product-btns-input'>
+                                    <Button onClick={() => setQuantity(quantity - 1)} disabled={quantity === 1}><i className="fa-solid fa-minus"></i></Button>
+                                    <input className='quantity-input' type="text" value={quantity} onChange={e => setQuantity(e.target.value)} />
+                                    <Button onClick={() => setQuantity(quantity + 1)}><i className="fa-solid fa-plus"></i></Button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='product-cartBtn'>
+                            <Button onClick={addToCart}>
+                                Add to Cart
+                            </Button>
+                        </div>
                     </div>
                 </Col>
             </Row>
-            <h2>Discover similar products</h2>
+            <h2 className='similar-products'>Discover similar products</h2>
             <Row xs={1} md={2} lg={3}>
                 {productsSuggested.map(productsItem => (
                     <Col key={productsItem.id}>
@@ -103,7 +115,7 @@ const ProductsId = () => {
                                 <Card.Text>
                                     {productsItem.price}
                                 </Card.Text>
-                                <Button variant="primary" className='card-btn'><i className="fa-solid fa-cart-plus"></i></Button>
+                                <Button variant="primary" className='card-btn' onClick={addToCart}><i className="fa-solid fa-cart-plus"></i></Button>
                             </Card.Body>
                         </Card>
                     </Col>

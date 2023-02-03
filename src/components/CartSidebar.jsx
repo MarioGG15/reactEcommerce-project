@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Offcanvas } from 'react-bootstrap';
+import { Button, Figure, Offcanvas } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartThunk, purchaseCartThunk } from '../store/slices/cart.slice';
 
-const CartSidebar = ({show, handleClose}) => {
+const CartSidebar = ({ show, handleClose }) => {
 
     const cart = useSelector(state => state.cart);
     const dispatch = useDispatch();
@@ -27,10 +27,20 @@ const CartSidebar = ({show, handleClose}) => {
                 <Offcanvas.Body>
                     <ul>
                         {cart.map(cartProduct => (
-                            <li key={cartProduct.id}>
-                                <img src={cartProduct.product.images[1].url} alt="" className='img-fluid' style={{height: "150px"}}/>
-                                {cartProduct.product.title}
-                            </li>
+                            <Figure key={cartProduct.id}>
+                            <Figure.Image
+                              width={171}
+                              height={180}
+                              alt="171x180"
+                              src={cartProduct.product?.images[0].url}
+                            />
+                            <Figure.Caption>
+                            {cartProduct.product?.title}
+                            </Figure.Caption>
+                            <Figure.Caption>
+                            Price: ${cartProduct.product?.price}
+                            </Figure.Caption>
+                          </Figure> 
                         ))}
                     </ul>
                     <Button onClick={checkoutCart}>

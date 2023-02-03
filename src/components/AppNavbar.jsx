@@ -28,18 +28,18 @@ const AppNavbar = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to="/login">
-                                Login
+                                <i className="fa-solid fa-user"></i> Login
                             </Nav.Link>
                             <Nav.Link as={Link} to="/purchases">
-                                Purchases
+                            <i className="fa-solid fa-bag-shopping"></i> Purchases
                             </Nav.Link>
-                            <Nav.Link onClick={handleShow}>Cart</Nav.Link>
-                            <Nav.Link onClick={logout}>Log out</Nav.Link>
+                            <Nav.Link onClick={handleShow}><i className="fa-solid fa-cart-shopping"></i> Cart</Nav.Link>
+                            <Nav.Link onClick={logout}><i className="fa-solid fa-right-from-bracket"></i> Log out</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <CartSidebar show={show} handleClose={handleClose}/>
+            <CartSidebar show={show} handleClose={handleClose} />
         </>
     );
 };

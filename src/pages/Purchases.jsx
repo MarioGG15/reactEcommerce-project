@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Figure, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPurchasesThunk } from '../store/slices/purchases.slice';
@@ -12,19 +13,39 @@ const Purchases = () => {
         dispatch(getPurchasesThunk());
     }, []);
 
+    console.log(purchases)
+
     return (
         <div>
-            <h1>Purchases</h1>
-            <ul>
+            <h1>My purchases</h1>
+            <ListGroup variant="flush">
                 {purchases.map(purchase => (
-                    <li key={purchase.id}>
-                        <Link to={`/products/${purchase.product.id}`}>
-                            {purchase.product?.title}
-                            <img src={purchase.product.images[0].url} alt="" />
-                        </Link>
-                    </li>
+                    <div className='purchase-container' key={purchase.id}>
+                        <ListGroup.Item>
+                            <Link to={`/products/${purchase.product?.id}`}>
+                                <Figure>
+                                    <Figure.Image
+                                        width={91}
+                                        height={100}
+                                        alt="171x180"
+                                        src={purchase.product?.images[2].url}
+                                        style={{ objectFit: "contain" }}
+                                    />
+                                </Figure>
+                            </Link>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                        {purchase.product?.title}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            Quantity: {purchase.quantity}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            Total: ${purchase.product?.price * purchase.quantity}
+                        </ListGroup.Item>
+                    </div>
                 ))}
-            </ul>
+            </ListGroup>
         </div>
     );
 };

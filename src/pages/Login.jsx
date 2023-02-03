@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    const {register, handleSubmit} = useForm();
+    const { register, handleSubmit } = useForm();
 
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Login = () => {
                 navigate("/");
             })
             .catch(error => {
-                if(error.response.status === 401){
+                if (error.response.status === 401) {
                     alert("Cuenta o contraseña incorreta")
                 }
                 console.log(error);
@@ -54,6 +54,21 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
+            <div className='test-data'>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Title>Test Data</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted"><i className="fa-solid fa-user"></i> User</Card.Subtitle>
+                        <Card.Text>
+                            john@gmail.com
+                        </Card.Text>
+                        <Card.Subtitle className="mb-2 text-muted"><i className="fa-solid fa-key"></i> Password</Card.Subtitle>
+                        <Card.Text>
+                            john1234
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </div>
         </div>
     );
 };
